@@ -12,11 +12,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/users', userRoutes);
 app.use('/news', newsRoutes);
 
-app.listen(port, (err) => {
-    if (err) {
-        return console.log('Something bad happened', err);
-    }
-    console.log(`Server is listening on ${port}`);
-});
+if (require.main === module) {
+    app.listen(port, (err) => {
+        if (err) {
+            return console.error('Failed to start server:', err);
+        }
+        console.log(`Server is listening on ${port}`);
+    });
+}
 
 module.exports = app;
